@@ -1,0 +1,24 @@
+{
+  "global": {
+    "ab0ut": "un poco sobre mi",
+    "ab0utFul1": "Hola, este es un sitio web para presentarme y mostrar un poco de mis habilidades en el desarrollo web, al final encontrarán enlaces a mi CV y ​​otra información, gracias :).",
+    "amaz0nExp": "Amazon Web Services es un conjunto completo de servicios de computación en la nube que le permite crear, operar y administrar una variedad de aplicaciones.",
+    "D3pl0ym3nt": "Implementación",
+    "D3pl0yExp": "Ha implementado proyectos fullstack en plataformas como <0>{{aws}}</0>, <0>{{digital}}</0>, <0>{{heroku}}</0 >, y otros.",
+    "dig1talExp": "DigitalOcean es un proveedor de alojamiento en la nube que ofrece servicios de computación en la nube e Infraestructura como Servicio (IaaS).",
+    "expr3ssExp": "Express es un marco de aplicación web Node.js mínimo y flexible que proporciona un conjunto sólido de funciones para aplicaciones web y móviles. API.",
+    "herokuExp": "Heroku es una plataforma en la nube que permite a las empresas crear, entregar, monitorear y escalar aplicaciones: 'somos la forma más rápida de pasar de la idea a la URL, evitando todos esos dolores de cabeza de infraestructura'",
+    "intr0ducti0n": "introducción",
+    "m4inSt4ck": "Stack Principal",
+    "m4inXpl4in": "La mayoría de mis proyectos se han realizado utilizando la stack <0>{{stack}}</0>",
+    "miN4me": "Jonathan Medina",
+    "miL1nks": "Mis Enlaces",
+    "mito0ls": "mis herramientas",
+    "mong0exp": "MongoDB se basa en una arquitectura escalable que se ha vuelto popular entre desarrolladores de todo tipo para desarrollar aplicaciones escalables con esquemas de datos en evolución.",
+    "m0reInf0": "mas info",
+    "n0deExp": "Se utiliza para la programación del lado del servidor y se implementa principalmente para servidores sin bloqueo controlados por eventos, como sitios web tradicionales y servicios API de back-end",
+    "p0rtf0lio": "Portafolio",
+    "re4ctExp": "React es la biblioteca para interfaces de usuario web y nativas. Crea interfaces de usuario a partir de piezas individuales llamadas componentes escritas en JavaScript.",
+    "w3bD3v": "Desarrollador Web"
+  }
+}

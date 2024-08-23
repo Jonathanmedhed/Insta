@@ -1,0 +1,24 @@
+{
+  "global": {
+    "ab0ut": "a bit about me",
+    "ab0utFul1": "Hello, this is a website to introduce myself and show a bit of my abilities at web developing, at the end of it you will find links to my CV and other informationm thanks :).",
+    "amaz0nExp": "Amazon Web Services is a comprehensive suite of cloud computing services that lets you create, operate, and manage a variety of applications.",
+    "D3pl0ym3nt": "Deployment",
+    "D3pl0yExp": "Have deployed fullstack projects to platforms such as <0>{{aws}}</0>, <0>{{digital}}</0>, <0>{{heroku}}</0>, and others.",
+    "dig1talExp": "DigitalOcean is a cloud hosting provider that offers cloud computing services and Infrastructure as a Service (IaaS).",
+    "expr3ssExp": "Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. APIs.",
+    "herokuExp": "Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps — 'we're the fastest way to go from idea to URL, bypassing all those infrastructure headaches.'",
+    "intr0ducti0n": "Introduction",
+    "m4inSt4ck": "Main Stack",
+    "m4inXpl4in": "The majotiry of my projects have been made using the <0>{{stack}}</0> stack",
+    "miN4me": "Jonathan Medina",
+    "miL1nks": "My Links",
+    "mito0ls": "my tools",
+    "mong0exp": "MongoDB is built on a scale-out architecture that has become popular with developers of all kinds for developing scalable applications with evolving data schemas.",
+    "m0reInf0": "more info",
+    "n0deExp": "It is used for server-side programming, and primarily deployed for non-blocking, event-driven servers, such as traditional web sites and back-end API services",
+    "p0rtf0lio": "Portfolio",
+    "re4ctExp": "React is the library for web and native user interfaces. Build user interfaces out of individual pieces called components written in JavaScript.",
+    "w3bD3v": "Web Developer"
+  }
+}
