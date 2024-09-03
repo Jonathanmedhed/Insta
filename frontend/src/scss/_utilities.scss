@@ -591,38 +591,57 @@
 /** Display */
 
 /** Align self */
+
+.--row {
+  display: flex;
+  flex-direction: row;
+}
+.--column {
+  display: flex;
+  flex-direction: column;
+}
 .--self-center {
+  display: flex;
   align-self: center;
 }
 .--self-left {
+  display: flex;
   align-self: left;
 }
 .--self-right {
+  display: flex;
   align-self: right;
 }
 
 /** Align items*/
 .--align-items-center {
+  display: flex;
   align-items: center;
 }
 .--align-items-left {
+  display: flex;
   align-items: left;
 }
 .--align-items-right {
+  display: flex;
   align-items: right;
 }
 
 /** Justify items*/
 .--just-items-center {
+  display: flex;
   justify-content: center;
 }
 .--just-items-left {
+  display: flex;
   justify-content: left;
 }
 .--just-items-right {
+  display: flex;
   justify-content: right;
 }
 .--just-items-between {
+  display: flex;
   justify-content: space-between;
 }
 
@@ -797,8 +816,9 @@
 /************************************************************************************************************
 Hover 
 ************************************************************************************************************/
-.hover-point {
-  &:hover {
+.--pointer {
+  &:hover,
+  &:active {
     cursor: pointer;
   }
 }

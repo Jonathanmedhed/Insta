@@ -1,10 +1,15 @@
 @import 'config';
 @import 'utilities';
 @import './components/cat-pop-up';
+@import './components/comments';
 @import './components/footer';
 @import './components/header';
 @import './components/input-switch';
+@import './components/menu-overlay';
+@import './components/overlay';
+@import './components/post';
 @import './pages/login';
+
 /** Main Config */
 * {
   box-sizing: border-box;
@@ -59,6 +64,20 @@ textarea {
   border-radius: 0.2rem;
   padding: 0.5rem;
   background-color: $gray-light-color;
+  outline: none;
+}
+
+.react-input-emoji--container {
+  padding-left: 0 !important;
+  border: none !important;
+  border-bottom: solid 1px $gray-color !important;
+  border-radius: 0 !important;
+  background-color: $white-color !important;
+  margin-top: 0.5rem !important;
+}
+
+.react-input-emoji--container {
+  margin: 0 !important;
 }
 
 button {
@@ -73,10 +92,6 @@ button {
   }
 }
 
-.--hide {
-  display: none;
-}
-
 .link-component {
   z-index: 1000;
   a,
@@ -89,6 +104,10 @@ button {
 /*****************************************************************************************************
 * Display 
 *****************************************************************************************************/
+
+.--hide {
+  display: none;
+}
 
 .--show-sm {
   &-md,

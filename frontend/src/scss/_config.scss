@@ -84,6 +84,7 @@ $sizeamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 /** Margin & Padding */
 $spaceamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+$spacetypes: ('half', 'qtr');
 @each $space in $spaceamounts {
   /** Margin */
   // All around margin
@@ -187,33 +188,93 @@ $spaceamounts: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
   margin: 0 0.5rem 0 0;
 }
 
-/* 0.2rem margin*/
+/* 0.25rem margin*/
 .--m-qter {
-  margin: 0.2rem;
+  margin: 0.25rem;
 }
 // Vertical margin
 .--my-qter {
-  margin: 0.2rem 0;
+  margin: 0.25rem 0;
 }
 // Horizontal margin
 .--mx-qter {
-  margin: 0 0.2rem;
+  margin: 0 0.25rem;
 }
 // Top margin
 .--mt-qter {
-  margin: 0.2rem 0 0 0;
+  margin: 0.25rem 0 0 0;
 }
 // Bottom margin
 .--mb-qter {
-  margin: 0 0 0.2rem 0;
+  margin: 0 0 0.25rem 0;
 }
 // Left margin
 .--ml-qter {
-  margin: 0 0 0 0.2rem;
+  margin: 0 0 0 0.25rem;
 }
 // Right margin
 .--mr-qter {
-  margin: 0 0.2rem 0 0;
+  margin: 0 0.25rem 0 0;
+}
+
+/*****************************************/
+
+/* 0.5rem margin*/
+.--p-half {
+  padding: 0.5rem;
+}
+// Vertical margin
+.--py-half {
+  padding: 0.5rem 0;
+}
+// Horizontal margin
+.--px-half {
+  padding: 0 0.5rem;
+}
+// Top margin
+.--pt-half {
+  padding: 0.5rem 0 0 0;
+}
+// Bottom margin
+.--pb-half {
+  padding: 0 0 0.5rem 0;
+}
+// Left margin
+.--pl-half {
+  padding: 0 0 0 0.5rem;
+}
+// Right margin
+.--pr-half {
+  padding: 0 0.5rem 0 0;
+}
+
+/* 0.25rem margin*/
+.--p-qter {
+  padding: 0.25rem;
+}
+// Vertical margin
+.--py-qter {
+  padding: 0.25rem 0;
+}
+// Horizontal margin
+.--px-qter {
+  padding: 0 0.25rem;
+}
+// Top margin
+.--pt-qter {
+  padding: 0.25rem 0 0 0;
+}
+// Bottom margin
+.--pb-qter {
+  padding: 0 0 0.25rem 0;
+}
+// Left margin
+.--pl-qter {
+  padding: 0 0 0 0.25rem;
+}
+// Right margin
+.--pr-qter {
+  padding: 0 0.25rem 0 0;
 }
 
 /** Max width */

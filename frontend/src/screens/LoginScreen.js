@@ -8,6 +8,7 @@ import FormContainer from '../components/FormContainer';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
+import Input from '../components/Input';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -74,15 +75,14 @@ const LoginScreen = () => {
               className='insta-logo'
               role='img'
             ></i>
-            <input
+            <Input
               className='--mb-half'
               type='email'
               placeholder='Enter email or username'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-
-            <input
+            <Input
               className='--mb-1'
               type='password'
               placeholder='Password'
