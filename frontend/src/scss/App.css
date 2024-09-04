@@ -2785,6 +2785,7 @@ Images
 .comments {
   width: 90vw;
   max-width: 70rem;
+  min-height: 80vh;
   display: flex;
   flex-direction: row;
 }
@@ -2811,10 +2812,16 @@ Images
   max-width: 70rem;
   display: flex;
   flex-direction: row;
+  border-radius: 0.1rem;
+  overflow: hidden;
 }
 
 .comments__comments {
   width: 100%;
+}
+.comments__comments.comment-section {
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  overflow-y: auto;
 }
 
 .comments__comment {
@@ -2868,7 +2875,7 @@ Images
 }
 
 .comments__options {
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0.2rem 0.3rem 0.2rem;
@@ -2919,10 +2926,17 @@ Images
 }
 
 .comments__media {
-  width: 50%;
+  max-width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+}
+.comments__media img {
+  max-height: 90vh;
 }
 .comments__media .video video {
-  background-color: black;
   width: 100%;
 }
 
@@ -2930,6 +2944,11 @@ Images
   display: flex;
   flex-direction: column;
   padding: 0 0.5rem;
+}
+.comments__post-info.comment-section {
+  padding: 0 0.5rem 0 0.5rem;
+  border-top: solid 1px rgb(225, 225, 225);
+  margin: auto 0 0 0;
 }
 
 .comments__option-row {
@@ -2958,6 +2977,22 @@ Images
   cursor: pointer;
 }
 
+.comments__input {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0 0 0;
+  border-top: solid 1px rgb(225, 225, 225);
+}
+
+@media (max-width: 640px) {
+  .comments__media {
+    display: none;
+  }
+  .comments__options {
+    width: 100%;
+    padding: 0.5rem 0.2rem 0.3rem 0.2rem;
+    background-color: rgb(255, 255, 255);
+  }
+}
 footer {
   display: flex;
   align-items: center;
@@ -5986,6 +6021,7 @@ input:checked + .slider-simple:before {
   max-width: 27.5rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 .post .post__header-right {
   cursor: pointer;
@@ -5993,46 +6029,15 @@ input:checked + .slider-simple:before {
 .post .post__header-right:active {
   opacity: 0.9;
 }
-.post .post__header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.2rem 0.1rem;
-}
-.post .post__header .post__header-left {
-  display: flex;
-  flex-direction: row;
-}
-.post .post__header .post__header-left .post__icon {
-  margin-right: 0.6rem;
-}
-.post .post__header .post__header-left .post__icon img {
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: 50%;
-}
-.post .post__header .post__header-left .post__title {
-  display: flex;
-  flex-direction: row;
-  padding-top: 0.25rem;
-}
-.post .post__header .post__header-left .post__title .post__title-top {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.post .post__header .post__header-left .post__title .user-verified {
-  position: relative;
-  top: 2px;
-  margin-left: 0.1rem;
-}
 .post .post__options {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.1rem 0.3rem 0.1rem;
+}
+.post .post__options.comment-section {
+  padding: 0.75rem 0;
 }
 .post .post__options .post__options-left {
   display: flex;
@@ -6073,8 +6078,52 @@ input:checked + .slider-simple:before {
   cursor: pointer;
 }
 .post .video video {
+  width: 100%;
   background-color: black;
-  width: 27.5rem;
+}
+
+.post__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.1rem;
+}
+.post__header.comment-section {
+  padding: 0.5rem 0.5rem;
+  border-bottom: solid 1px rgb(225, 225, 225);
+}
+.post__header .post__header-left {
+  display: flex;
+  flex-direction: row;
+}
+.post__header .post__header-left .post__icon {
+  margin-right: 0.6rem;
+}
+.post__header .post__header-left .post__icon img {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+}
+.post__header .post__header-left .post__title {
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.25rem;
+}
+.post__header .post__header-left .post__title .post__title-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.post__header .post__header-left .post__title .user-verified {
+  position: relative;
+  top: 2px;
+  margin-left: 0.1rem;
+}
+
+.post__input {
+  padding: 0 0.5rem 0 0.4rem;
+  border-bottom: solid 1px rgb(225, 225, 225);
 }
 
 .login {
@@ -6199,10 +6248,21 @@ textarea {
 .react-input-emoji--container {
   padding-left: 0 !important;
   border: none !important;
-  border-bottom: solid 1px rgb(225, 225, 225) !important;
   border-radius: 0 !important;
   background-color: rgb(255, 255, 255) !important;
   margin-top: 0.5rem !important;
+}
+
+.react-input-emoji--input {
+  padding: 0.5rem 0 !important;
+}
+
+.react-input-emoji--placeholder {
+  left: 0 !important;
+}
+
+.react-input-emoji--button {
+  padding: 0 0 0 0.5rem !important;
 }
 
 .react-input-emoji--container {

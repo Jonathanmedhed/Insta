@@ -2,44 +2,11 @@
   max-width: 27.5rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.5rem;
   .post__header-right {
     cursor: pointer;
     &:active {
       opacity: 0.9;
-    }
-  }
-  .post__header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.2rem 0.1rem;
-    .post__header-left {
-      display: flex;
-      flex-direction: row;
-      .post__icon {
-        margin-right: 0.6rem;
-        img {
-          width: 2.6rem;
-          height: 2.6rem;
-          border-radius: 50%;
-        }
-      }
-      .post__title {
-        display: flex;
-        flex-direction: row;
-        padding-top: 0.25rem;
-        .post__title-top {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-        .user-verified {
-          position: relative;
-          top: 2px;
-          margin-left: 0.1rem;
-        }
-      }
     }
   }
 
@@ -49,6 +16,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 0.1rem 0.3rem 0.1rem;
+    &.comment-section {
+      padding: 0.75rem 0;
+    }
     .post__options-left {
       display: flex;
       flex-direction: row;
@@ -96,8 +66,53 @@
 
   .video {
     video {
+      width: 100%;
       background-color: black;
-      width: 27.5rem;
     }
   }
+}
+
+.post__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0.1rem;
+  &.comment-section {
+    padding: 0.5rem 0.5rem;
+    border-bottom: solid 1px $gray-color;
+  }
+
+  .post__header-left {
+    display: flex;
+    flex-direction: row;
+    .post__icon {
+      margin-right: 0.6rem;
+      img {
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+      }
+    }
+    .post__title {
+      display: flex;
+      flex-direction: row;
+      padding-top: 0.25rem;
+      .post__title-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .user-verified {
+        position: relative;
+        top: 2px;
+        margin-left: 0.1rem;
+      }
+    }
+  }
+}
+
+.post__input {
+  padding: 0 0.5rem 0 0.4rem;
+  border-bottom: solid 1px $gray-color;
 }

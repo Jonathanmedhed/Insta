@@ -4,7 +4,7 @@ const Footer = ({ className }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={`${className ? className : ''}`}>
+    <footer className={`${className || ''}`}>
       <Container>
         <Row>
           <Col className='text-center py-3'>

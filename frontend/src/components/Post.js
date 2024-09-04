@@ -4,23 +4,14 @@ import Input from './Input';
 import { Overlay } from './Overlay';
 import { Video } from './Video';
 import ImageComponent from './ImageComponent';
-import commentIcon from '../images/comment.svg';
-import dislikeEmpty from '../images/dislike-empty.svg';
-import dislikeFilled from '../images/dislike-filled.svg';
 import imgExample from '../images/example-post.webp';
-import likeEmpty from '../images/like-empty.svg';
-import likeFilled from '../images/like-filled.svg';
-import iconExample from '../images/prog-bg-sm.jpg';
-import saveIcon from '../images/tag.svg';
-import saveFilledIcon from '../images/tag-filled.svg';
-import shareIcon from '../images/share.svg';
-import { formatNumber } from '../utils/functions';
-import { menuIcon } from '../utils/icons';
-import { verifiedIcon } from '../utils/icons';
 import { Comments } from './Comments';
+import { InstaHeader } from './InstaHeader';
+import { InstaOptions } from './InstaOptions';
 
 export const Post = ({
   comments,
+  date,
   dislikes,
   disliked,
   isFollowed,
@@ -33,8 +24,8 @@ export const Post = ({
 }) => {
   const [comment, setComment] = useState('');
   const [currentComments, setCurrentComments] = useState(comments || []);
-  const [currentDislikes, setcurrentDislikes] = useState(dislikes || []);
-  const [currentLikes, setcurrentLikes] = useState(dislikes || []);
+  const [currentDislikes, setCurrentDislikes] = useState(dislikes || []);
+  const [currentLikes, setcurrentLikes] = useState(likes || []);
   const [followed, setFollowed] = useState(isFollowed || false);
   const [isLiked, setIsLiked] = useState(liked || false);
   const [isDisLiked, setIsDisLiked] = useState(disliked || false);
@@ -51,11 +42,13 @@ export const Post = ({
   const handleLike = () => {
     setIsDisLiked(false);
     setIsLiked(!isLiked);
+    setcurrentLikes(currentLikes + 1);
   };
 
   const handleDislike = () => {
     setIsLiked(false);
     setIsDisLiked(!isLiked);
+    setCurrentDislikes(currentDislikes + 1);
   };
 
   const menuOptions = [
@@ -83,6 +76,21 @@ export const Post = ({
     },
   ];
 
+  const handleAddComment = () => {
+    comment &&
+      setCurrentComments(
+        currentComments.concat({
+          id: 'id21ed',
+          comment: comment,
+          user: {
+            img: imgExample,
+            username: 'user123456',
+          },
+        })
+      );
+    setComment('');
+  };
+
   return (
     <div className='post'>
       <Overlay hide={() => setShowOptions(false)} show={showOptions}>
@@ -105,6 +113,8 @@ export const Post = ({
       <Overlay hide={() => setShowComments(false)} show={showComments}>
         <CommentSection
           comments={currentComments}
+          setComments={setCurrentComments}
+          date={date}
           dislikes={currentDislikes}
           disliked={isDisLiked}
           isFollowed={followed}
@@ -113,32 +123,14 @@ export const Post = ({
           likes={currentLikes}
           media={media}
           type={type}
+          isSaved={isSaved}
         />
       </Overlay>
-      <div className='post__header'>
-        <div className='post__header-left'>
-          <div className='post__icon'>
-            <img alt={`img`} src={iconExample} />
-          </div>
-          <div className='post__title'>
-            <div className='post__title-left'>
-              <div className='post__title-top'>
-                <h3>accounttitle </h3>
-                <span className='user-verified'>{verifiedIcon}</span>
-                <span className='--ml-qter'>•</span>{' '}
-                <span className='post-time --ml-qter'>3d</span>
-              </div>
-              <span>sub title</span>
-            </div>
-          </div>
-        </div>
-        <div
-          className='post__header-right'
-          onClick={() => setShowOptions(!showOptions)}
-        >
-          {menuIcon}
-        </div>
-      </div>
+      <InstaHeader
+        date={date}
+        setShowOptions={setShowOptions}
+        showOptions={showOptions}
+      />
       {type === 'video' ? (
         <Video
           controls={false}
@@ -158,43 +150,19 @@ export const Post = ({
           />
         )
       )}
-      <div className='post__options'>
-        <div className='post__options-left --row'>
-          <span
-            className='--row --align-items-center'
-            onClick={() => handleLike()}
-            onKeyDown={() => handleLike()}
-          >
-            <img alt='dislike' src={isLiked ? likeFilled : likeEmpty} />
-            <span className='post__amounts'>{formatNumber(likes)}</span>
-          </span>
-          <span
-            className='--row --align-items-center --ml-half'
-            onClick={() => handleDislike()}
-            onKeyDown={() => handleDislike()}
-          >
-            <img
-              alt='dislike'
-              src={isDisLiked ? dislikeFilled : dislikeEmpty}
-            />
-            <span className='post__amounts'>{formatNumber(dislikes)}</span>
-          </span>
-        </div>
-        <div className='post__options-right'>
-          <span
-            className=' --ml-qter'
-            onClick={() => setShowComments(!showComments)}
-          >
-            <img alt='comment' src={commentIcon} />
-          </span>
-          <span className=' --ml-qter' onClick={() => console.log('')}>
-            <img alt='share' src={shareIcon} />
-          </span>
-          <span className=' --ml-qter' onClick={() => setSaved(!saved)}>
-            <img alt='save' src={saved ? saveFilledIcon : saveIcon} />
-          </span>
-        </div>
-      </div>
+      <InstaOptions
+        handleDislike={handleDislike}
+        handleLike={handleLike}
+        isDisLiked={isDisLiked}
+        isLiked={isLiked}
+        dislikes={currentDislikes}
+        likes={currentLikes}
+        setShowComments={setShowComments}
+        showComments={showComments}
+        setSaved={setSaved}
+        saved={saved}
+        isCommentSection={true}
+      />
       <div className='post__description'>
         <p className='--bold --mt-qter'>This is a description about the vid</p>
       </div>
@@ -206,33 +174,12 @@ export const Post = ({
       </span>
       <Comments className='--mt-1' comments={currentComments} />
       <Input
-        className='post__comment'
+        className='post__input'
         type='emoji'
         placeholder='Add a comment...'
         value={comment}
         onChange={setComment}
-        onEnter={() => {
-          setCurrentComments(
-            currentComments.concat({
-              id: 'id21ed',
-              comment: comment,
-              user: {
-                img: imgExample,
-                username: 'user123456',
-              },
-            })
-          );
-          console.log(
-            currentComments.concat({
-              id: 'id21ed',
-              comment: comment,
-              user: {
-                img: imgExample,
-                username: 'user123456',
-              },
-            })
-          );
-        }}
+        onEnter={handleAddComment}
       />
     </div>
   );

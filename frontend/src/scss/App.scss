@@ -70,10 +70,21 @@ textarea {
 .react-input-emoji--container {
   padding-left: 0 !important;
   border: none !important;
-  border-bottom: solid 1px $gray-color !important;
   border-radius: 0 !important;
   background-color: $white-color !important;
   margin-top: 0.5rem !important;
+}
+
+.react-input-emoji--input {
+  padding: 0.5rem 0 !important;
+}
+
+.react-input-emoji--placeholder {
+  left: 0 !important;
+}
+
+.react-input-emoji--button {
+  padding: 0 0 0 0.5rem !important;
 }
 
 .react-input-emoji--container {

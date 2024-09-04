@@ -54,7 +54,7 @@ const Header = ({ action, className, centerItem, icon, options, title }) => {
   );
 
   return (
-    <header className={`header ${className ? className : ''} `}>
+    <header className={`header ${className || ''} `}>
       <div className='header__inner'>
         <div className='header__left'>
           {icon && <span className='header-icon'>{icon}</span>}
