@@ -1,29 +1,120 @@
 import { Post } from '../components/Post';
-import imgExample from '../images/example-post.webp';
+import { posts, users, comments } from '../utils/data';
+import personImg1 from '../images/person1.jpg';
+import personImg2 from '../images/person2.jpg';
+import personImg3 from '../images/person3.jpg';
+import personImg4 from '../images/person4.jpg';
+import personImg5 from '../images/person5.jpg';
+import landscapeImg1 from '../images/landscape1.jpg';
+import landscapeImg2 from '../images/landscape2.jpg';
+import landscapeImg3 from '../images/landscape3.jpg';
+import landscapeImg4 from '../images/landscape4.jpg';
+import landscapeImg5 from '../images/landscape5.jpg';
+import partyImg1 from '../images/party1.jpg';
+import partyImg2 from '../images/party2.jpg';
+import partyImg3 from '../images/party3.jpg';
+import partyImg4 from '../images/party4.jpg';
+import partyImg5 from '../images/party5.jpg';
 
 const MainScreen = () => {
-  var d1 = new Date();
-  d1.setDate(d1.getDate() - 5);
+  const pics = [
+    personImg1,
+    personImg2,
+    personImg3,
+    personImg4,
+    personImg5,
+    landscapeImg1,
+    landscapeImg2,
+    landscapeImg3,
+    landscapeImg4,
+    landscapeImg5,
+    partyImg1,
+    partyImg2,
+    partyImg3,
+    partyImg4,
+    partyImg5,
+  ];
+  const getRandom = (mn, mx) => {
+    return Math.random() * (mx - mn) + mn;
+  };
 
-  var d2 = new Date();
-  d2.setMonth(d2.getMonth() - 3);
+  const idGenerator = () => {
+    var S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (
+      S4() +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      '-' +
+      S4() +
+      S4() +
+      S4()
+    );
+  };
 
-  var d3 = new Date();
-  d3.setDate(d3.getDate() - 6);
-  d3.setFullYear(d3.getFullYear() - 1);
+  const userGenerator = () => {
+    var S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
 
-  var d4 = new Date();
-  d4.setHours(d4.getHours() - 2);
+    var a = ['Small', 'Blue', 'Ugly'];
+    var b = ['Bear', 'Dog', 'Banana'];
 
-  const posts = [
+    var rA = Math.floor(Math.random() * a.length);
+    var rB = Math.floor(Math.random() * b.length);
+    var name = a[rA] + b[rB];
+    return name + S4();
+  };
+
+  const createUsers = () => {
+    let usersPrev = [];
+    for (let index = 0; index < 1000; index++) {
+      usersPrev.push({
+        id: idGenerator(),
+        username: userGenerator(),
+        img: pics[Math.floor(getRandom(1, pics.length)) - 1],
+        posts: [],
+        comments: [],
+        liked: [],
+        friends: '',
+      });
+    }
+    return usersPrev;
+  };
+
+  const createComments = () => {
+    let commentsPrev = [];
+    for (let index = 0; index < 1000; index++) {
+      commentsPrev.push({
+        id: idGenerator(),
+        user: user1,
+        comment:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm',
+        likes: 0,
+        dislikes: 0,
+      });
+    }
+    return commentsPrev;
+  };
+
+  const createdComments = createComments();
+  console.log(createdUsers);
+
+  const postsEx = [
     {
       comments: [
         {
           id: 'id21ed',
           comment: 'hello this is a comment xD',
-          date: d2,
+          date: '',
           user: {
-            img: imgExample,
+            img: '',
             username: 'user123456',
           },
           dislikes: 10,
@@ -35,9 +126,9 @@ const MainScreen = () => {
         {
           id: 'id231ed',
           comment: 'bye this is a comment :c',
-          date: d4,
+          date: '',
           user: {
-            img: imgExample,
+            img: '',
             username: 'user123456',
           },
           dislikes: 5,
@@ -47,7 +138,7 @@ const MainScreen = () => {
           likes: 20,
         },
       ],
-      date: d3,
+      date: '',
       dislikes: 300,
       disliked: true,
       isFollowed: false,
@@ -66,9 +157,9 @@ const MainScreen = () => {
         {
           id: 'id21ed',
           comment: 'hello this is a comment xD',
-          date: d4,
+          date: '',
           user: {
-            img: imgExample,
+            img: '',
             username: 'user123456',
           },
           dislikes: 20,
@@ -80,9 +171,9 @@ const MainScreen = () => {
         {
           id: 'id231ed',
           comment: 'bye this is a comment :c',
-          date: d2,
+          date: '',
           user: {
-            img: imgExample,
+            img: '',
             username: 'user123456',
           },
           dislikes: 5,
@@ -94,9 +185,9 @@ const MainScreen = () => {
         {
           id: 'id231ed',
           comment: 'bye this is a comment :c',
-          date: d3,
+          date: '',
           user: {
-            img: imgExample,
+            img: '',
             username: 'user123456',
           },
           dislikes: 50,
@@ -106,7 +197,7 @@ const MainScreen = () => {
           likes: 5,
         },
       ],
-      date: d3,
+      date: '',
       dislikes: 1500,
       disliked: false,
       isFollowed: true,
@@ -116,7 +207,7 @@ const MainScreen = () => {
       likes: 400,
       media: {
         alt: 'alt',
-        src: imgExample,
+        src: '',
       },
       type: 'img',
     },

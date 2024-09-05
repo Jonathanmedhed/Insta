@@ -8,6 +8,7 @@ import imgExample from '../images/example-post.webp';
 import { Comments } from './Comments';
 import { InstaHeader } from './InstaHeader';
 import { InstaOptions } from './InstaOptions';
+import { ShareBox } from './ShareBox';
 
 export const Post = ({
   comments,
@@ -125,6 +126,9 @@ export const Post = ({
           type={type}
           isSaved={isSaved}
         />
+      </Overlay>
+      <Overlay hide={() => setShowComments(false)} show={true}>
+        <ShareBox />
       </Overlay>
       <InstaHeader
         date={date}

@@ -6126,6 +6126,74 @@ input:checked + .slider-simple:before {
   border-bottom: solid 1px rgb(225, 225, 225);
 }
 
+.share-box {
+  width: 40rem;
+  max-width: 90%;
+  border-radius: 0.5rem;
+  background-color: rgb(255, 255, 255);
+}
+.share-box .share-box__header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.share-box .share-box__header i {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.share-box .share-box__header i:active {
+  opacity: 0.8;
+}
+.share-box .share-box__links {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.share-box .share-box__link {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0.5rem 0.5rem 0.5rem;
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+  background-color: black;
+  cursor: pointer;
+}
+.share-box .share-box__link:active {
+  opacity: 0.8;
+}
+.share-box .share-box__link i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.share-box .share-box__link.email i {
+  top: 45%;
+  font-size: 1.5rem;
+}
+.share-box .share-box__link.facebook i {
+  left: 48%;
+  top: 50.5%;
+  font-size: 1.7rem;
+}
+.share-box .share-box__link.twitter i {
+  font-size: 1.7rem;
+}
+.share-box .share-box__link.whatsapp i {
+  font-size: 2rem;
+}
+
 .login {
   display: flex;
   flex-direction: column;
