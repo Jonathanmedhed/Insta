@@ -17,6 +17,8 @@ export const InstaOptions = ({
   isLiked,
   dislikes,
   likes,
+  setShowShare,
+  showShare,
   setShowComments,
   showComments,
   setSaved,
@@ -58,7 +60,11 @@ export const InstaOptions = ({
           </span>
         )}
         {isCommentSection && (
-          <span className=' --ml-qter' onClick={() => console.log('')}>
+          <span
+            className=' --ml-qter'
+            onClick={() => setShowShare(true)}
+            onKeyDown={() => setShowShare(true)}
+          >
             <img alt='share' src={shareIcon} />
           </span>
         )}

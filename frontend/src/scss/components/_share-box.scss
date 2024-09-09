@@ -73,4 +73,20 @@
       }
     }
   }
+  .share-box__button {
+    width: 100%;
+    background-color: $blue-color;
+    color: $white-color;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    &.--sent {
+      background-color: $success-color;
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
 }

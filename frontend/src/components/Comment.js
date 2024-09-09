@@ -8,7 +8,7 @@ import { verifiedIcon } from '../utils/icons';
 import { formatNumber } from '../utils/functions';
 import moment from 'moment';
 
-export const Comment = ({ comment, key }) => {
+export const Comment = ({ className, comment, key }) => {
   const [isLiked, setIsLiked] = useState(comment.liked || false);
   const [isDisLiked, setIsDisLiked] = useState(comment.disliked || false);
   const [currentDislikes, setCurrentDislikes] = useState(
@@ -30,7 +30,7 @@ export const Comment = ({ comment, key }) => {
 
   const dotIcon = <img alt='dot' className='dot' src={iconDot} />;
   return (
-    <div className='comments__comment --mb-half' key={key}>
+    <div className={`comments__comment --mb-half ${className || ''}`} key={key}>
       <div className='comments__comment-left'>
         <div className='comments__icon'>
           <img alt={`img`} src={comment?.user?.img} />
@@ -39,20 +39,18 @@ export const Comment = ({ comment, key }) => {
           <div className='comments__title-left'>
             <div className='comments__title-center'>
               <p>
-                <span className='--bold --mr-half'>
-                  {comment?.user?.username}
-                </span>
+                <span className='--bold'>{comment?.user?.username}</span>
                 {comment?.user?.isVerified && (
                   <span className='user-verified'>{verifiedIcon}</span>
                 )}
-                {comment?.comment}{' '}
+                <span className='--ml-half'>{comment?.comment} </span>
               </p>
               <span className='post-time'>
-                <span className=''>{moment(comment.date).fromNow()}</span>
+                <div className=''>{moment(comment.date).fromNow()}</div>
                 {dotIcon}
-                <span className=''>{formatNumber(currentLikes)} likes</span>
+                <div className=''>{`${formatNumber(currentLikes)} likes`} </div>
                 {dotIcon}
-                {formatNumber(currentDislikes)} dislikes
+                <div>{`${formatNumber(currentDislikes)} dislikes`} </div>
               </span>
             </div>
           </div>

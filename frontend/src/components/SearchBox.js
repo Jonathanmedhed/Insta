@@ -5,11 +5,11 @@ const SearchBox = ({ list, setList }) => {
 
   const onChange = (value) => {
     setKeyword(value);
-    //let resultWithSomethingB = array.filter(element => element.something === 'b')[0];
-    let resultWithSomethingB = list.filter((element) =>
-      element.includes(value)
+    setList(
+      list.filter((item) =>
+        item?.username?.toLowerCase()?.includes(value?.toLowerCase())
+      )
     );
-    setList(resultWithSomethingB);
   };
   return (
     <div className=''>
@@ -18,7 +18,7 @@ const SearchBox = ({ list, setList }) => {
         name='q'
         onChange={(e) => onChange(e.target.value)}
         value={keyword}
-        placeholder='Search Products...'
+        placeholder='Search'
         className=''
       />
     </div>

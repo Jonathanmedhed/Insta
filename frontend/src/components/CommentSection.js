@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Video } from './Video';
 import Input from './Input';
 import ImageComponent from './ImageComponent';
-import { formatNumberFull } from '../utils/functions';
+import { formatNumberFull, idGenerator } from '../utils/functions';
 import { Comments } from './Comments';
 import { InstaHeader } from './InstaHeader';
 import { Overlay } from './Overlay';
 import { InstaOptions } from './InstaOptions';
-import imgExample from '../images/example-post.webp';
 import moment from 'moment';
 
 export const CommentSection = ({
@@ -17,18 +16,19 @@ export const CommentSection = ({
   disliked,
   liked,
   likes,
-  media,
-  type,
   isFollowed,
   isReported,
+  setIsReported,
   isSaved,
+  post,
+  user,
+  hide,
 }) => {
   const [isLiked, setIsLiked] = useState(liked || false);
   const [isDisLiked, setIsDisLiked] = useState(disliked || false);
   const [comment, setComment] = useState('');
   const [showOptions, setShowOptions] = useState(false);
   const [followed, setFollowed] = useState(isFollowed || false);
-  const [reported, setReported] = useState(isReported || false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
   const [currentComments, setCurrentComments] = useState(comments || []);
   const [currentDislikes, setCurrentDislikes] = useState(dislikes || []);
@@ -53,14 +53,21 @@ export const CommentSection = ({
 
   const menuOptions = [
     {
-      className: reported ? '--color-success' : '--color-danger',
-      label: reported ? 'Reported' : 'Report',
-      onClick: () => setReported(!reported),
+      className: isReported ? '--color-blue' : '--color-danger',
+      label: isReported ? 'Undo report' : 'Report',
+      onClick: () => {
+        setIsReported(!isReported);
+        setShowOptions(false);
+        hide();
+      },
     },
     {
       className: followed ? '--color-danger' : '',
       label: followed ? 'Unfollow' : 'Follow',
-      onClick: () => setFollowed(!followed),
+      onClick: () => {
+        setFollowed(!followed);
+        setShowOptions(false);
+      },
     },
     {
       className: isLinkCopied ? '--color-success' : '',
@@ -77,17 +84,18 @@ export const CommentSection = ({
   ];
 
   const handleAddComment = () => {
-    comment &&
-      setCurrentComments(
-        currentComments.concat({
-          id: 'id21ed',
-          comment: comment,
-          user: {
-            img: imgExample,
-            username: 'user123456',
-          },
-        })
-      );
+    const date = new Date();
+    const commentToAdd = {
+      id: idGenerator(),
+      date: date,
+      comment: comment,
+      disliked: false,
+      dislikes: 0,
+      liked: false,
+      likes: 0,
+      user: user,
+    };
+    setCurrentComments(currentComments.concat(commentToAdd));
     setComment('');
   };
 
@@ -112,35 +120,39 @@ export const CommentSection = ({
       </Overlay>
       <div className='comments__content'>
         <div className='comments__media'>
-          {type === 'video' ? (
+          {post?.type === 'video' ? (
             <Video
               controls={false}
               autoplay={false}
               muted={false}
-              src={media.src}
+              src={post.media}
             />
           ) : (
-            type === 'img' && (
-              <ImageComponent
-                alt={media.alt}
-                //className={true}
-                //key={true}
-                //onClick={true}
-                //onLoad={true}
-                src={media.src}
-              />
-            )
+            <ImageComponent
+              //className={true}
+              //key={true}
+              //onClick={true}
+              //onLoad={true}
+              src={post?.media}
+            />
           )}
         </div>
         <div className='comments__options'>
           <InstaHeader
             className='comment-section'
-            date={date}
+            date={post.date}
+            isFollowed={followed}
             setShowOptions={setShowOptions}
+            setIsFollowed={setFollowed}
             showOptions={showOptions}
+            post={post}
           />
           <div className='comments__options-left'>
-            <Comments className='comment-section' comments={currentComments} />
+            <Comments
+              className='comment-section'
+              comments={currentComments.sort((b, a) => a.date - b.date)}
+              user={user}
+            />
           </div>
 
           <div className='comments__post-info comment-section'>

@@ -4,41 +4,30 @@ import Input from './Input';
 import { Overlay } from './Overlay';
 import { Video } from './Video';
 import ImageComponent from './ImageComponent';
-import imgExample from '../images/example-post.webp';
 import { Comments } from './Comments';
 import { InstaHeader } from './InstaHeader';
 import { InstaOptions } from './InstaOptions';
 import { ShareBox } from './ShareBox';
+import { idGenerator } from '../utils/functions';
 
-export const Post = ({
-  comments,
-  date,
-  dislikes,
-  disliked,
-  isFollowed,
-  isReported,
-  isSaved,
-  liked,
-  likes,
-  media,
-  type,
-}) => {
+const Post = ({ key, post, user }) => {
   const [comment, setComment] = useState('');
-  const [currentComments, setCurrentComments] = useState(comments || []);
-  const [currentDislikes, setCurrentDislikes] = useState(dislikes || []);
-  const [currentLikes, setcurrentLikes] = useState(likes || []);
-  const [followed, setFollowed] = useState(isFollowed || false);
-  const [isLiked, setIsLiked] = useState(liked || false);
-  const [isDisLiked, setIsDisLiked] = useState(disliked || false);
+  const [currentComments, setCurrentComments] = useState(post?.comments || []);
+  const [currentDislikes, setCurrentDislikes] = useState(post?.dislikes || []);
+  const [currentLikes, setcurrentLikes] = useState(post?.likes || []);
+  const [followed, setFollowed] = useState(post?.isFollowed || false);
+  const [isLiked, setIsLiked] = useState(post?.liked || false);
+  const [isDisLiked, setIsDisLiked] = useState(post?.disliked || false);
+  const [reported, setReported] = useState(post?.isReported || false);
+  const [saved, setSaved] = useState(post?.isSaved || false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
-  const [reported, setReported] = useState(isReported || false);
-  const [saved, setSaved] = useState(isSaved || false);
   const [showComments, setShowComments] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const [showShare, setShowShare] = useState(false);
   /**
-  const [likesAmount, setLikesAmount] = useState(likes || []);
-  const [dislikesAmount, setDislikesAmount] = useState(dislikes || []);
-   */
+    const [likesAmount, setLikesAmount] = useState(likes || []);
+    const [dislikesAmount, setDislikesAmount] = useState(dislikes || []);
+     */
 
   const handleLike = () => {
     setIsDisLiked(false);
@@ -56,12 +45,18 @@ export const Post = ({
     {
       className: reported ? '--color-success' : '--color-danger',
       label: reported ? 'Reported' : 'Report',
-      onClick: () => setReported(!reported),
+      onClick: () => {
+        setReported(!reported);
+        setShowOptions(false);
+      },
     },
     {
       className: followed ? '--color-danger' : '',
       label: followed ? 'Unfollow' : 'Follow',
-      onClick: () => setFollowed(!followed),
+      onClick: () => {
+        setFollowed(!followed);
+        setShowOptions(false);
+      },
     },
     {
       className: isLinkCopied ? '--color-success' : '',
@@ -78,22 +73,23 @@ export const Post = ({
   ];
 
   const handleAddComment = () => {
-    comment &&
-      setCurrentComments(
-        currentComments.concat({
-          id: 'id21ed',
-          comment: comment,
-          user: {
-            img: imgExample,
-            username: 'user123456',
-          },
-        })
-      );
+    const date = new Date();
+    const commentToAdd = {
+      id: idGenerator(),
+      date: date,
+      comment: comment,
+      disliked: false,
+      dislikes: 0,
+      liked: false,
+      likes: 0,
+      user: user,
+    };
+    setCurrentComments(currentComments.concat(commentToAdd));
     setComment('');
   };
 
   return (
-    <div className='post'>
+    <div className='post' key={key}>
       <Overlay hide={() => setShowOptions(false)} show={showOptions}>
         <div className='menu-overlay'>
           <div className='menu-overlay__options'>
@@ -113,78 +109,106 @@ export const Post = ({
       </Overlay>
       <Overlay hide={() => setShowComments(false)} show={showComments}>
         <CommentSection
+          close={() => setShowComments(false)}
           comments={currentComments}
           setComments={setCurrentComments}
-          date={date}
+          date={post?.date}
           dislikes={currentDislikes}
           disliked={isDisLiked}
+          hide={() => setShowComments(false)}
           isFollowed={followed}
           isReported={reported}
-          liked={liked}
+          setIsReported={setReported}
+          liked={post?.liked}
           likes={currentLikes}
-          media={media}
-          type={type}
-          isSaved={isSaved}
+          media={post?.media}
+          type={post?.type}
+          isSaved={post?.isSaved}
+          user={user}
+          post={post}
         />
       </Overlay>
-      <Overlay hide={() => setShowComments(false)} show={true}>
-        <ShareBox />
+      <Overlay hide={() => setShowShare(false)} show={showShare}>
+        <ShareBox hide={() => setShowShare(false)} user={user} />
       </Overlay>
       <InstaHeader
-        date={date}
+        date={post?.date}
+        isFollowed={followed}
         setShowOptions={setShowOptions}
+        setIsFollowed={setFollowed}
         showOptions={showOptions}
+        post={post}
       />
-      {type === 'video' ? (
+      {post?.type === 'video' ? (
         <Video
           controls={false}
           autoplay={false}
           muted={false}
-          src={media.src}
+          src={post.media}
         />
       ) : (
-        type === 'img' && (
-          <ImageComponent
-            alt={media.alt}
-            //className={true}
-            //key={true}
-            //onClick={true}
-            //onLoad={true}
-            src={media.src}
-          />
-        )
+        <ImageComponent
+          //className={true}
+          //key={true}
+          //onClick={true}
+          //onLoad={true}
+          src={post?.media}
+        />
       )}
-      <InstaOptions
-        handleDislike={handleDislike}
-        handleLike={handleLike}
-        isDisLiked={isDisLiked}
-        isLiked={isLiked}
-        dislikes={currentDislikes}
-        likes={currentLikes}
-        setShowComments={setShowComments}
-        showComments={showComments}
-        setSaved={setSaved}
-        saved={saved}
-        isCommentSection={true}
-      />
-      <div className='post__description'>
-        <p className='--bold --mt-qter'>This is a description about the vid</p>
-      </div>
-      <span
-        className='--pointer --mt-qter'
-        onClick={() => setShowComments(!showComments)}
-      >
-        View all comments
-      </span>
-      <Comments className='--mt-1' comments={currentComments} />
-      <Input
-        className='post__input'
-        type='emoji'
-        placeholder='Add a comment...'
-        value={comment}
-        onChange={setComment}
-        onEnter={handleAddComment}
-      />
+      {reported ? (
+        <div className='reported-post' onClick={() => setReported(!reported)}>
+          <div className='reported-text'>Reported</div>
+          <div className='reported-undo'>
+            undo
+            <i className='fa fa-undo' aria-hidden='true' />
+          </div>
+        </div>
+      ) : (
+        <>
+          <InstaOptions
+            handleDislike={handleDislike}
+            handleLike={handleLike}
+            isDisLiked={isDisLiked}
+            isLiked={isLiked}
+            dislikes={currentDislikes}
+            likes={currentLikes}
+            setShowShare={setShowShare}
+            showShare={showShare}
+            setShowComments={setShowComments}
+            showComments={showComments}
+            setSaved={setSaved}
+            saved={saved}
+            isCommentSection={true}
+          />
+          <div className='post__description'>
+            <p className='--bold --mt-qter'>
+              This is a description about the vid
+            </p>
+          </div>
+          <Comments
+            className='--mt-1'
+            comments={currentComments.sort((b, a) => a.date - b.date)}
+            max={2}
+            user={user}
+          />
+          <span
+            className='--pointer --mt-qter'
+            onClick={() => setShowComments(!showComments)}
+          >
+            View all comments
+          </span>
+          <Input
+            className='post__input'
+            type='emoji'
+            placeholder='Add a comment...'
+            value={comment}
+            onChange={setComment}
+            onEnter={handleAddComment}
+          />
+        </>
+      )}
     </div>
   );
 };
+
+export default Post;
