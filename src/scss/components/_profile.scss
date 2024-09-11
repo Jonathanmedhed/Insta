@@ -1,0 +1,106 @@
+.profile {
+  .profile__top {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1rem;
+    @media (max-width: 640px) {
+      max-width: 90vw;
+    }
+    img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+    .profile__info {
+      display: flex;
+      flex-direction: column;
+
+      .profile__info-username {
+        font-size: 1rem;
+        line-height: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+      }
+      .profile__info-body {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+  }
+  .profile__bottom {
+    display: flex;
+    flex-direction: column;
+    .profile__bottom-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      .profile__bot-item {
+        width: 25%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        opacity: 0.7;
+        &.active {
+          opacity: 1;
+        }
+        i {
+          margin-right: 0.25rem;
+        }
+        img {
+          width: 1rem;
+          margin-right: 0.25rem;
+        }
+      }
+    }
+    .profile__bottom-body {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 30rem;
+      div {
+        position: relative;
+        height: 10rem;
+        cursor: pointer;
+        img {
+          width: 10rem;
+          height: 10rem;
+          object-fit: cover;
+        }
+        span {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          color: $white-color;
+          background-color: rgb(0, 0, 0, 0.3);
+          padding: 0.1rem 0.25rem;
+        }
+      }
+    }
+
+    @media (max-width: 640px) {
+      .profile__bottom-body {
+        max-width: 90vw;
+        div {
+          height: 5rem;
+          img {
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}

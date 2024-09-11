@@ -1,0 +1,19 @@
+.menu-overlay {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  max-width: 90vh;
+  .menu-overlay__options {
+    display: flex;
+    flex-direction: column;
+    .menu-overlay__option {
+      width: 20rem;
+      padding: 0.8rem 0.5rem;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      border-bottom: solid 1px $gray-color;
+    }
+  }
+}

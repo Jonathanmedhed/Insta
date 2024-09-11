@@ -1,0 +1,117 @@
+.share-box {
+  width: 30rem;
+  max-width: 90vw;
+  border-radius: 0.5rem;
+  background-color: $white-color;
+  padding: 1rem;
+  .share-box__header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    i {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 1.2rem;
+      cursor: pointer;
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+  .share-box__links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .share-box__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .share-box__icon {
+      position: relative;
+      width: 3rem;
+      height: 3rem;
+      margin: 0 0.5rem 0.2rem 0.5rem;
+      border-radius: 50%;
+      color: white;
+      background-color: black;
+      cursor: pointer;
+      &:active {
+        opacity: 0.8;
+      }
+    }
+    i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.email {
+      i {
+        top: 45%;
+        font-size: 1.5rem;
+      }
+    }
+    &.facebook {
+      i {
+        left: 48%;
+        top: 50.5%;
+        font-size: 1.7rem;
+      }
+    }
+    &.twitter {
+      i {
+        font-size: 1.7rem;
+      }
+    }
+    &.whatsapp {
+      i {
+        font-size: 2rem;
+      }
+    }
+    .share-box__icon-text {
+      font-weight: bold;
+    }
+  }
+  .share-box__button {
+    width: 100%;
+    background-color: $blue-color;
+    color: $white-color;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    &.--sent {
+      background-color: $success-color;
+    }
+    &:active {
+      opacity: 0.8;
+    }
+  }
+  .share-box__x-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+  }
+  .share-box__search {
+    margin-bottom: 1rem;
+  }
+  .share-box__friends {
+    min-height: 10rem;
+    max-height: 30rem;
+    overflow: auto;
+    margin-bottom: 1rem;
+  }
+}
