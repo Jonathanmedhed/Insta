@@ -1,17 +1,17 @@
-@import 'config';
-@import 'utilities';
-@import './components/cat-pop-up';
-@import './components/comments';
-@import './components/footer';
-@import './components/header';
-@import './components/input-switch';
-@import './components/menu-overlay';
-@import './components/overlay';
-@import './components/post';
-@import './components/profile';
-@import './components/share-box';
-@import './pages/login';
-@import './pages/main';
+@import "config";
+@import "utilities";
+@import "./components/cat-pop-up";
+@import "./components/comments";
+@import "./components/footer";
+@import "./components/header";
+@import "./components/input-switch";
+@import "./components/menu-overlay";
+@import "./components/overlay";
+@import "./components/post";
+@import "./components/profile";
+@import "./components/share-box";
+@import "./pages/login";
+@import "./pages/main";
 
 /** Main Config */
 * {
@@ -20,7 +20,7 @@
   padding: 0;
 }
 body {
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   font-size: 0.75rem;
@@ -130,10 +130,10 @@ button {
   }
 }
 
-.profile-btn {
+.prof-btn {
   color: $white-dark-color;
-  font-size: 1rem;
-  line-height: 1.1rem;
+  font-size: 1.2rem;
+  line-height: 1.3rem;
 }
 
 /*****************************************************************************************************

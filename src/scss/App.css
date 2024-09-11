@@ -6605,10 +6605,10 @@ button:disabled {
   background-color: rgb(0, 149, 246);
 }
 
-.profile-btn {
+.prof-btn {
   color: rgb(247, 247, 247);
-  font-size: 1rem;
-  line-height: 1.1rem;
+  font-size: 1.2rem;
+  line-height: 1.3rem;
 }
 
 /*****************************************************************************************************
