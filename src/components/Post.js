@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import Input from './Input';
-import { Overlay } from './Overlay';
-import { Video } from './Video';
-import ImageComponent from './ImageComponent';
-import { Comments } from './Comments';
-import { InstaHeader } from './InstaHeader';
-import { InstaOptions } from './InstaOptions';
-import { ShareBox } from './ShareBox';
-import { checkIsVideo, idGenerator } from '../utils/functions';
+import React, { useState } from "react";
+import Input from "./Input";
+import { Overlay } from "./Overlay";
+import { Video } from "./Video";
+import ImageComponent from "./ImageComponent";
+import { Comments } from "./Comments";
+import { InstaHeader } from "./InstaHeader";
+import { InstaOptions } from "./InstaOptions";
+import { ShareBox } from "./ShareBox";
+import { checkIsVideo, idGenerator } from "../utils/functions";
+import { BASE_URL } from "../constants";
 
 const Post = ({ key, post, user }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [currentComments, setCurrentComments] = useState(post?.comments || []);
   const [currentDislikes, setCurrentDislikes] = useState(post.dislikes || []);
   const [currentLikes, setCurrentLikes] = useState(post.likes || []);
@@ -24,31 +25,31 @@ const Post = ({ key, post, user }) => {
 
   const menuOptions = [
     {
-      className: '--color-danger',
-      label: reported ? 'Undo reporting' : 'Report',
+      className: "--color-danger",
+      label: reported ? "Undo reporting" : "Report",
       onClick: () => {
         setReported(!reported);
         setShowOptions(false);
       },
     },
     {
-      className: followed ? '--color-danger' : '',
-      label: followed ? 'Unfollow' : 'Follow',
+      className: followed ? "--color-danger" : "",
+      label: followed ? "Unfollow" : "Follow",
       onClick: () => {
         setFollowed(!followed);
         setShowOptions(false);
       },
     },
     {
-      className: isLinkCopied ? '--color-success' : '',
-      label: isLinkCopied ? 'Copied!' : 'Copy link',
+      className: isLinkCopied ? "--color-success" : "",
+      label: isLinkCopied ? "Copied!" : "Copy link",
       onClick: () => {
-        navigator.clipboard.writeText('copied link');
+        navigator.clipboard.writeText(`${BASE_URL}posts/${post.id}`);
         setIsLinkCopied(true);
       },
     },
     {
-      label: 'Cancel',
+      label: "Cancel",
       onClick: () => setShowOptions(false),
     },
   ];
@@ -66,7 +67,7 @@ const Post = ({ key, post, user }) => {
       user: user,
     };
     setCurrentComments(currentComments.concat(commentToAdd));
-    setComment('');
+    setComment("");
   };
 
   let checkLiked =
@@ -101,14 +102,14 @@ const Post = ({ key, post, user }) => {
   };
 
   return (
-    <div className='post' key={key}>
+    <div className="post" key={key}>
       <Overlay hide={() => setShowOptions(false)} show={showOptions}>
-        <div className='menu-overlay'>
-          <div className='menu-overlay__options'>
+        <div className="menu-overlay">
+          <div className="menu-overlay__options">
             {menuOptions.map((option, i) => (
               <div
                 className={`menu-overlay__option ${
-                  option.className ? option.className : ''
+                  option.className ? option.className : ""
                 }`}
                 key={i}
                 onClick={option.onClick}
@@ -120,7 +121,7 @@ const Post = ({ key, post, user }) => {
         </div>
       </Overlay>
       <Overlay hide={() => setShowShare(false)} show={showShare}>
-        <ShareBox hide={() => setShowShare(false)} user={user} />
+        <ShareBox hide={() => setShowShare(false)} user={user} post={post} />
       </Overlay>
       <InstaHeader
         date={post?.date}
@@ -133,11 +134,11 @@ const Post = ({ key, post, user }) => {
         isPost={true}
       />
       {reported ? (
-        <div className='reported-post' onClick={() => setReported(!reported)}>
-          <div className='reported-text'>Reported</div>
-          <div className='reported-undo'>
+        <div className="reported-post" onClick={() => setReported(!reported)}>
+          <div className="reported-text">Reported</div>
+          <div className="reported-undo">
             undo
-            <i className='fa fa-undo' aria-hidden='true' />
+            <i className="fa fa-undo" aria-hidden="true" />
           </div>
         </div>
       ) : (
@@ -174,27 +175,27 @@ const Post = ({ key, post, user }) => {
             post={post}
             user={post?.user}
           />
-          <div className='post__description'>
-            <p className='--bold --mt-qter'>
+          <div className="post__description">
+            <p className="--bold --mt-qter">
               This is a description about the vid
             </p>
           </div>
           <Comments
-            className='--mt-1'
+            className="--mt-1"
             comments={currentComments.sort((b, a) => a.date - b.date)}
             max={2}
             user={user}
           />
           <span
-            className='--pointer --mt-qter'
+            className="--pointer --mt-qter"
             onClick={() => setShowComments(!showComments)}
           >
             View all comments
           </span>
           <Input
-            className='post__input'
-            type='emoji'
-            placeholder='Add a comment...'
+            className="post__input"
+            type="emoji"
+            placeholder="Add a comment..."
             value={comment}
             onChange={setComment}
             onEnter={handleAddComment}

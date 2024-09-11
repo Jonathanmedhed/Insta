@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Video } from './Video';
-import Input from './Input';
-import ImageComponent from './ImageComponent';
-import { formatNumberFull, idGenerator } from '../utils/functions';
-import { Comments } from './Comments';
-import { InstaHeader } from './InstaHeader';
-import { Overlay } from './Overlay';
-import { InstaOptions } from './InstaOptions';
-import moment from 'moment';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ShareBox } from './ShareBox';
+import React, { useEffect, useState } from "react";
+import { Video } from "./Video";
+import Input from "./Input";
+import ImageComponent from "./ImageComponent";
+import { formatNumberFull, idGenerator } from "../utils/functions";
+import { Comments } from "./Comments";
+import { InstaHeader } from "./InstaHeader";
+import { Overlay } from "./Overlay";
+import { InstaOptions } from "./InstaOptions";
+import moment from "moment";
+import { useNavigate, useParams } from "react-router-dom";
+import { ShareBox } from "./ShareBox";
+import { BASE_URL } from "../constants";
 
-export const CommentSection = ({ user, users, posts }) => {
+export const CommentSection = ({ user, posts }) => {
   let { id } = useParams();
   const navigate = useNavigate();
 
@@ -20,7 +21,7 @@ export const CommentSection = ({ user, users, posts }) => {
   });
 
   const [post] = useState(postFound || {});
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [showOptions, setShowOptions] = useState(false);
   const [followed, setFollowed] = useState(post.isFollowed || false);
   const [isLinkCopied, setIsLinkCopied] = useState(false);
@@ -64,8 +65,8 @@ export const CommentSection = ({ user, users, posts }) => {
 
   const menuOptions = [
     {
-      className: isReported ? '--color-blue' : '--color-danger',
-      label: isReported ? 'Undo report' : 'Report',
+      className: isReported ? "--color-blue" : "--color-danger",
+      label: isReported ? "Undo report" : "Report",
       onClick: () => {
         setIsReported(!isReported);
         setShowOptions(false);
@@ -73,23 +74,23 @@ export const CommentSection = ({ user, users, posts }) => {
       },
     },
     {
-      className: followed ? '--color-danger' : '',
-      label: followed ? 'Unfollow' : 'Follow',
+      className: followed ? "--color-danger" : "",
+      label: followed ? "Unfollow" : "Follow",
       onClick: () => {
         setFollowed(!followed);
         setShowOptions(false);
       },
     },
     {
-      className: isLinkCopied ? '--color-success' : '',
-      label: isLinkCopied ? 'Copied!' : 'Copy link',
+      className: isLinkCopied ? "--color-success" : "",
+      label: isLinkCopied ? "Copied!" : "Copy link",
       onClick: () => {
-        navigator.clipboard.writeText('copied link');
+        navigator.clipboard.writeText(`${BASE_URL}posts/${post.id}`);
         setIsLinkCopied(true);
       },
     },
     {
-      label: 'Cancel',
+      label: "Cancel",
       onClick: () => setShowOptions(false),
     },
   ];
@@ -107,28 +108,28 @@ export const CommentSection = ({ user, users, posts }) => {
       user: user,
     };
     setCurrentComments(currentComments.concat(commentToAdd));
-    setComment('');
+    setComment("");
   };
 
   useEffect(
     () => {
       if (!postFound) {
-        navigate('/');
+        navigate("/");
       }
     } /**, [] */
   );
 
   return (
-    <div className='main'>
+    <div className="main">
       {postFound ? (
-        <div className='comments'>
+        <div className="comments">
           <Overlay hide={() => setShowOptions(false)} show={showOptions}>
-            <div className='menu-overlay'>
-              <div className='menu-overlay__options'>
+            <div className="menu-overlay">
+              <div className="menu-overlay__options">
                 {menuOptions.map((option, i) => (
                   <div
                     className={`menu-overlay__option ${
-                      option.className ? option.className : ''
+                      option.className ? option.className : ""
                     }`}
                     key={i}
                     onClick={option.onClick}
@@ -140,11 +141,15 @@ export const CommentSection = ({ user, users, posts }) => {
             </div>
           </Overlay>
           <Overlay hide={() => setShowShare(false)} show={showShare}>
-            <ShareBox hide={() => setShowShare(false)} user={user} />
+            <ShareBox
+              hide={() => setShowShare(false)}
+              post={post}
+              user={user}
+            />
           </Overlay>
-          <div className='comments__content'>
-            <div className='comments__media'>
-              {post?.type === 'video' ? (
+          <div className="comments__content">
+            <div className="comments__media">
+              {post?.type === "video" ? (
                 <Video
                   controls={false}
                   autoplay={false}
@@ -161,9 +166,9 @@ export const CommentSection = ({ user, users, posts }) => {
                 />
               )}
             </div>
-            <div className='comments__options'>
+            <div className="comments__options">
               <InstaHeader
-                className='comment-section'
+                className="comment-section"
                 date={post?.date}
                 isFollowed={followed}
                 setShowOptions={setShowOptions}
@@ -174,27 +179,27 @@ export const CommentSection = ({ user, users, posts }) => {
               />
               {isReported ? (
                 <div
-                  className='reported-post'
+                  className="reported-post"
                   onClick={() => setIsReported(!isReported)}
                 >
-                  <div className='reported-text'>Reported</div>
-                  <div className='reported-undo'>
+                  <div className="reported-text">Reported</div>
+                  <div className="reported-undo">
                     undo
-                    <i className='fa fa-undo' aria-hidden='true' />
+                    <i className="fa fa-undo" aria-hidden="true" />
                   </div>
                 </div>
               ) : (
                 <>
-                  <div className='comments__options-left'>
+                  <div className="comments__options-left">
                     <Comments
-                      className='comment-section'
+                      className="comment-section"
                       comments={currentComments.sort((b, a) => a.date - b.date)}
                       user={user}
                     />
                   </div>
-                  <div className='comments__post-info comment-section'>
+                  <div className="comments__post-info comment-section">
                     <InstaOptions
-                      className='comment-section'
+                      className="comment-section --py-half"
                       handleDislike={handleDislike}
                       handleLike={handleLike}
                       isDisLiked={currentDislikes ? checkDisliked : false}
@@ -209,31 +214,31 @@ export const CommentSection = ({ user, users, posts }) => {
                       user={post?.user}
                       isCommentSection={true}
                     />
-                    <span className='post__amounts --bold'>
-                      <span className='post__amount'>
+                    <span className="post__amounts --bold">
+                      <span className="post__amount">
                         {formatNumberFull(currentLikes.length)}
-                      </span>{' '}
+                      </span>{" "}
                       likes
                     </span>
-                    <span className='post__amounts --bold'>
-                      <span className='post__amount'>
+                    <span className="post__amounts --bold">
+                      <span className="post__amount">
                         {formatNumberFull(currentDislikes.length)}
-                      </span>{' '}
+                      </span>{" "}
                       dislikes
                     </span>
-                    <span className='post-time'>
+                    <span className="post-time">
                       {moment(post.date).fromNow()}
                     </span>
                     <Input
-                      className='comments__input'
-                      type='emoji'
-                      placeholder='Add a comment...'
+                      className="comments__input"
+                      type="emoji"
+                      placeholder="Add a comment..."
                       value={comment}
                       onChange={setComment}
                       onEnter={handleAddComment}
                     />
                     <span
-                      className={`comments__post ${comment ? '--active' : ''}`}
+                      className={`comments__post ${comment ? "--active" : ""}`}
                       onClick={handleAddComment}
                     >
                       Post
@@ -245,7 +250,7 @@ export const CommentSection = ({ user, users, posts }) => {
           </div>
         </div>
       ) : (
-        'Post not Found'
+        "Post not Found"
       )}
     </div>
   );
