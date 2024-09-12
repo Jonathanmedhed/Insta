@@ -1,32 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import MainScreen from './screens/MainScreen';
-import InstaIcon from './images/insta.png';
-import Profile from './components/Profile';
-import { CommentSection } from './components/CommentSection';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import MainScreen from "./screens/MainScreen";
+import InstaIcon from "./images/insta.png";
+import Profile from "./components/Profile";
+import { CommentSection } from "./components/CommentSection";
 import {
   createDate,
   getRandom,
   idGenerator,
   userGenerator,
-} from './utils/functions';
-import personImg1 from './images/person1.jpg';
-import personImg2 from './images/person2.jpg';
-import personImg3 from './images/person3.jpg';
-import personImg4 from './images/person4.jpg';
-import personImg5 from './images/person5.jpg';
-import landscapeImg1 from './images/landscape1.jpg';
-import landscapeImg2 from './images/landscape2.jpg';
-import landscapeImg3 from './images/landscape3.jpg';
-import landscapeImg4 from './images/landscape4.jpg';
-import landscapeImg5 from './images/landscape5.jpg';
-import partyImg1 from './images/party1.jpg';
-import partyImg2 from './images/party2.jpg';
-import partyImg3 from './images/party3.jpg';
-import partyImg4 from './images/party4.jpg';
-import partyImg5 from './images/party5.jpg';
-import { useState } from 'react';
+} from "./utils/functions";
+import personImg1 from "./images/person1.jpg";
+import personImg2 from "./images/person2.jpg";
+import personImg3 from "./images/person3.jpg";
+import personImg4 from "./images/person4.jpg";
+import personImg5 from "./images/person5.jpg";
+import landscapeImg1 from "./images/landscape1.jpg";
+import landscapeImg2 from "./images/landscape2.jpg";
+import landscapeImg3 from "./images/landscape3.jpg";
+import landscapeImg4 from "./images/landscape4.jpg";
+import landscapeImg5 from "./images/landscape5.jpg";
+import partyImg1 from "./images/party1.jpg";
+import partyImg2 from "./images/party2.jpg";
+import partyImg3 from "./images/party3.jpg";
+import partyImg4 from "./images/party4.jpg";
+import partyImg5 from "./images/party5.jpg";
+import { useState } from "react";
 
 const App = () => {
   const pics = [
@@ -47,17 +47,17 @@ const App = () => {
     partyImg5,
   ];
   const videos = [
-    'https://videos.pexels.com/video-files/19164356/19164356-sd_426_240_25fps.mp4',
-    'https://cdn.pixabay.com/video/2021/01/11/61695-499594106_tiny.mp4',
-    'https://cdn.pixabay.com/video/2020/11/25/57315-484331186_tiny.mp4',
-    'https://videos.pexels.com/video-files/2795405/2795405-sd_240_426_25fps.mp4',
-    'https://videos.pexels.com/video-files/2795396/2795396-sd_240_426_25fps.mp4',
+    "https://videos.pexels.com/video-files/19164356/19164356-sd_426_240_25fps.mp4",
+    "https://cdn.pixabay.com/video/2021/01/11/61695-499594106_tiny.mp4",
+    "https://cdn.pixabay.com/video/2020/11/25/57315-484331186_tiny.mp4",
+    "https://videos.pexels.com/video-files/2795405/2795405-sd_240_426_25fps.mp4",
+    "https://videos.pexels.com/video-files/2795396/2795396-sd_240_426_25fps.mp4",
   ];
 
   let trueOrFalse = [true, false];
 
   const text =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
   /********************************Create Users*********************************/
   const createUsers = () => {
@@ -138,6 +138,7 @@ const App = () => {
     // create video posts
     for (let index = 0; index < 100; index++) {
       postsPrev.push({
+        id: idGenerator(),
         comment: text.substring(0, getRandom(30, 60)),
         comments: createdComments.slice(getRandom(0, 50), getRandom(51, 99)),
         date: createDate(),
@@ -177,29 +178,29 @@ const App = () => {
     <>
       <BrowserRouter>
         <Header
-          className=''
-          icon={<img alt='insta-icon' src={InstaIcon} />}
-          title='InstaApp'
+          className=""
+          icon={<img alt="insta-icon" src={InstaIcon} />}
+          title="InstaApp"
           user={users[0]}
         />
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={<MainScreen posts={posts} user={users[0]} users={users} />}
           />
           <Route
-            path='users/:id'
+            path="users/:id"
             element={<Profile posts={posts} user={users[0]} users={users} />}
           />
           <Route
-            path='posts/:id'
+            path="posts/:id"
             element={
               <CommentSection posts={posts} user={users[0]} users={users} />
             }
           />
         </Routes>
       </BrowserRouter>
-      <Footer className='' />
+      <Footer className="" />
     </>
   );
 };

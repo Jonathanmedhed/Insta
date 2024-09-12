@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Video } from "./Video";
 import Input from "./Input";
 import ImageComponent from "./ImageComponent";
-import { formatNumberFull, idGenerator } from "../utils/functions";
+import {
+  checkIsVideo,
+  formatNumberFull,
+  idGenerator,
+} from "../utils/functions";
 import { Comments } from "./Comments";
 import { InstaHeader } from "./InstaHeader";
 import { Overlay } from "./Overlay";
@@ -110,7 +114,6 @@ export const CommentSection = ({ user, posts }) => {
     setCurrentComments(currentComments.concat(commentToAdd));
     setComment("");
   };
-
   useEffect(
     () => {
       if (!postFound) {
@@ -149,12 +152,12 @@ export const CommentSection = ({ user, posts }) => {
           </Overlay>
           <div className="comments__content">
             <div className="comments__media">
-              {post?.type === "video" ? (
+              {checkIsVideo(post.media) ? (
                 <Video
                   controls={false}
                   autoplay={false}
                   muted={false}
-                  src={post?.media}
+                  src={post.media}
                 />
               ) : (
                 <ImageComponent

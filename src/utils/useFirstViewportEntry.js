@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const useFirstViewportEntry = (ref, observerOptions) => {
   const [entered, setEntered] = useState(false);

@@ -6,7 +6,6 @@ const Header = ({ user, className, centerItem, icon, title }) => {
   const location = useLocation();
   const { pathname } = location;
 
-  console.log(pathname);
   return (
     <header className={`header ${className || ""} `}>
       <div className="header__inner">
